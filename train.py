@@ -169,7 +169,7 @@ if __name__ == '__main__':
     parser.add_argument('--noise', type=str, default='gaussian_blind', help='kind of noise to use')
     parser.add_argument('--snr', type=float, default=1., help='snr parameter')
     # frequency-representation (fr) module parameters
-    parser.add_argument('--fr_module_type', type=str, default='fr', help='type of the fr module: [fr | psnet]')
+    parser.add_argument('--fr_module_type', type=str, default='fr_fno', help='type of the fr module: [fr | psnet]')
     parser.add_argument('--fr_n_layers', type=int, default=20, help='number of convolutional layers in the fr module')
     parser.add_argument('--fr_n_filters', type=int, default=64, help='number of filters per layer in the fr module')
     parser.add_argument('--fr_kernel_size', type=int, default=3,
