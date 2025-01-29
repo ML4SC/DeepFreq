@@ -161,6 +161,7 @@ class FrequencyRepresentationModule_FNO(nn.Module):
         x = x.unsqueeze(-1)
         x = self.mod(x)
         x = x.squeeze(-1)
+        # print(x.shape)
         x = self.out_layer(x).view(bsz, -1)
         return x
 
@@ -180,11 +181,14 @@ class FrequencyCountingModule(nn.Module):
         mod += [nn.Conv1d(n_filters, 1, 1)]
         self.mod = nn.Sequential(*mod)
         self.out_layer = nn.Linear(fr_size // downsampling, n_output)
+        # self.out_layer = nn.Linear(244, n_output) #(fr_size - 1) // downsampling + 1, n_output)
 
     def forward(self, inp):
         bsz = inp.size(0)
         inp = inp[:, None]
+        # print(inp.shape)
         x = self.mod(inp)
         x = x.view(bsz, -1)
-        y = self.out_layer(x)
+        # print(x.shape)
+        y = self.out_layer(x) #[:,:200] for literature checkpoint
         return y

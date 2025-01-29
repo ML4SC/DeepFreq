@@ -2,6 +2,7 @@ import os
 import torch
 import errno
 import modules
+import subprocess
 
 def model_parameters(model):
     num_params = 0
@@ -12,7 +13,8 @@ def model_parameters(model):
 
 def symlink_force(target, link_name):
     try:
-        os.symlink(target, link_name)
+        # os.symlink(target, link_name)
+        subprocess.run(["mklink", "/J", link_name, target], shell=True)
     except OSError as e:
         if e.errno == errno.EEXIST:
             os.remove(link_name)
